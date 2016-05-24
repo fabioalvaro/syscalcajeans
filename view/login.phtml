@@ -1,0 +1,87 @@
+<?php
+	// Verifica se o usuário já está logado no sistema
+	if (isset($_SESSION['_app_user']['logado'])) 
+	{
+       Application::redirect('?ctrl=index');
+   	}
+	
+	$v_params 	  = $this->getParams();
+	$boo_err_val  = $v_params['err_val'];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<title>SeragiWeb</title>
+    
+    	<!-- Le styles -->
+		<link href="view/css/bootstrap.css" rel="stylesheet">
+		<style type="text/css">
+      	body {
+        	padding-top: 40px;
+        	padding-bottom: 40px;
+        	background-color: #f5f5f5;
+      	}
+
+      	.form {
+        	max-width: 200px;
+        	padding: 19px 29px 29px;
+        	margin: 0 auto 20px;
+        	background-color: #fff;
+        	border: 1px solid #e5e5e5;
+        	-webkit-border-radius: 5px;
+           	-moz-border-radius: 5px;
+            border-radius: 5px;
+        	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        } 
+
+    </style>
+    	<link href="view/css/bootstrap-responsive.css" rel="stylesheet">
+	</head>
+    <body>
+    	<div class="container">
+			
+			<form method="post" class="form">
+				<legend>Login</legend>
+				<label for="identificacao">Identificação</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-user"></i></span>
+						<input name="st_identificacao" id="identificacao" value="" class="username span2" type="text">
+					</div>
+				</div>
+					
+				<label for="senha">Senha</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-lock"></i></span>
+						<input name="st_senha" id="senha" class="password span2" type="password">
+					</div>
+				</div>
+				
+				<div class="button_div">
+					<input name="Submit" value="Logar" class="btn btn-primary" type="submit">
+				</div>
+			</form>
+			
+			<?php if( $boo_err_val ) { ?> 
+			<div class="row-fluid">
+				<div class="alert alert-error">
+          			<h4>
+          				<stron>Ops! Identificação ou senha inválidas. </stron>
+          			</h4>
+          			<p>Tente novamente!</p>
+          		</div>
+      		</div><!--/row-->
+      		<?php } ?>	      		
+		
+
+    	</div> <!-- /container -->	
+    	
+    	<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="view/js/bootstrap.min.js"></script>
+  	</body>
+</html>

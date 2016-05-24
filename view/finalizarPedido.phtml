@@ -1,0 +1,153 @@
+<?php
+ 	$v_params 	   = $this->getParams();
+	$v_condpag     = $v_params['v_condpag'];
+	$int_qtd_total = $v_params['int_qtd_total'];
+	$num_val_total = $v_params['num_val_total'];
+	$v_clientes    = $v_params['v_clientes'];
+	$erro		   = $v_params['erro'];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<title>SeragiWeb</title>
+    
+    	<!-- Le styles -->
+		<link href="view/css/bootstrap.css" rel="stylesheet">
+    	<style type="text/css">
+      		body {
+        	   padding-top: 	60px;
+        	   padding-bottom: 40px;
+      		}
+      		.sidebar-nav {
+        	   padding: 9px 0;
+      		}
+
+      		@media (max-width: 980px) {
+        		/* Enable use of floated navbar text */
+        		.navbar-text.pull-right {
+          			float: none;
+          			padding-left:  5px;
+          			padding-right: 5px;
+        		}
+      		}
+      
+      		#item img {
+      			height: 200px;
+        		width : 200px; 
+      		}
+    	</style>
+    
+    	<link href="view/css/bootstrap-responsive.css" rel="stylesheet">
+	</head>
+    <body>
+    	<div class="container">
+    		<div class="row-fluid">
+    			<div class="span">
+    				<div class="masthead">
+        				<h3 class="muted">Finalizar Pedido</h3>
+      				</div>
+      									
+    				<p class="muted"  >
+    					<span class="label label-success">Peças: <?php echo $int_qtd_total ?>  /  Total: <?php echo 'R$ '.number_format( $num_val_total, 2, ',', '.' );  ?></span>
+      				<hr>
+					
+					<?php if( trim( $erro ) != '' ) { ?> 
+					<div class="row-fluid">
+						<div class="alert alert-error">
+          				<h4>
+          					<stron>Ops! <?php echo $erro ?> </stron>
+          				</h4>
+          					<p>Tente novamente!</p>
+          				</div>
+      				</div><!--/row-->
+      				<?php } ?>	 
+      				
+          			<form method="post" >
+          					<!-- Clientes --> 
+    						<?php
+    						if( $_SESSION['_app_user']['tppessoa'] == 'vendedor' )
+							{	
+    	 					?>
+    	 				<div class="control-group">	
+    	 					<label class="control-label" for="cliente"><i class="icon-briefcase"></i> Cliente </label>	
+    							<div class="controls controls-row">
+    								<select class="input-xxlarge" name="cliente" id="cliente" >
+    									<option value="-1"> </option>
+										<?php
+											foreach( $v_clientes AS $o_cliente )
+											{
+					    				?>	
+										<option value="<?php echo $o_cliente->getId(); ?>"> <?php echo $o_cliente->getCNPJ_CPF() . ' - '. $o_cliente->getRazaoSocial() ; ?> </option>
+										<?php
+											} 
+										?>
+									</select>
+								</div>
+							<?php
+							}
+    	 					?>
+    						<!-- Fim - CLiente -->
+              			 <div class="control-group">            				
+              				<label class="control-label" for="inputEmail"><i class="icon-briefcase"></i> Condição de Pagamento</label>
+              				<div class="controls controls-row">
+                				<select class="input-xxlarge" name="condpag" id="condpag" >
+									<?php
+									foreach( $v_condpag AS $o_condpag )
+									{
+									?>	
+										<option value="<?php echo $o_condpag->getId(); ?>"> <?php echo $o_condpag->getDescricao(); ?> </option>
+									<?php
+									} 
+									?>
+								</select>
+              				</div>
+            			</div>
+            			
+            			
+						<!--
+						<div class="control-group">
+              				<label class="control-label" for="inputEmail"><i class="icon-user"></i> Full Name</label>
+              				<div class="controls controls-row">
+                				<input class="input-xxlarge" id="inputEmail" placeholder="Cool Person" type="text">
+              				</div>
+            			</div>
+            			-->
+						
+						<div class="control-group">
+              				<label class="control-label" for="obs"><i class="icon-pencil"></i> Observações</label>
+             	 			<div class="controls">
+                				<textarea rows="6" class="input-xxlarge" id="Obs" name="obs" placeholder="Entre com as observações"></textarea>
+              				</div>
+            			</div>
+            			
+            			<div class="control-group">
+    						<div class="controls">
+      							<a href="?ctrl=pedido&action=showcart" class="btn">voltar</a>
+      							<button type="submit" class="btn btn-success">Concluir</button>
+   							</div>
+   						</div>
+					</form>
+					
+					<p style="">
+         				<span class="label label-important">	
+         				Obrigado por escolher Amora Morena Jeans, todos pedidos estão sujeitos a analise financeira e consulta de disponibilidade em estoque.
+         				</span>
+         				</p>
+
+
+          			
+       			</div> <!--Span-->
+      		</div><!--/row-->
+			<hr>
+      		<footer> 
+      			&copy;2013 - Agape World Inform&aacute;tica Ltda - 
+      			<a href=" http://www.agapeworld.com.br" >www.agapeworld.com.br</a> - Fone: (43) 3033-5886 – (43) 9914-9896 - E-mail: agape@agapeworld.com.br     		
+      		</footer>
+
+   		</div><!--/.fluid-container-->	
+    	<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="view/js/bootstrap.min.js"></script>
+  	</body>
+</html>

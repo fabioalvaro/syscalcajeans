@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<title>SeragiWeb</title>
+    
+    	<!-- Le styles -->
+		<link href="view/css/bootstrap.css" rel="stylesheet">
+    	<style type="text/css">
+      		body {
+        	   padding-top: 	60px;
+        	   padding-bottom: 40px;
+      		}
+      		.sidebar-nav {
+        	   padding: 9px 0;
+      		}
+
+      		@media (max-width: 980px) {
+        		/* Enable use of floated navbar text */
+        		.navbar-text.pull-right {
+          			float: none;
+          			padding-left:  5px;
+          			padding-right: 5px;
+        		}
+      		}
+      
+      		#item img {
+      			height: 200px;
+        		width : 200px; 
+      		}
+    	</style>
+    
+    	<link href="view/css/bootstrap-responsive.css" rel="stylesheet">
+	</head>
+    <body>
+    	 <!-- Menu -->
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+      		<div class="navbar-inner">
+        		<div class="container">
+    				<a class="brand" href="#">SeragiWeb</a>
+           			<div class="nav-collapse collapse">
+            			<ul class="nav pull-right">
+            				<li> <a href="?ctrl=pedido&action=showcart"> <i class="icon-shopping-cart icon-white"></i> Meu Carrinho </a> </li>  
+            				<li> <a href="?ctrl=section&action=logout">  <i class="icon-off icon-white"> </i> Sair </a> </li> 
+           				</ul>
+            
+            			<ul class="nav">
+             	 			<li class="active"><a href="?ctrl=index">Home</a></li>
+              				<li><a href="?ctrl=cliente&action=edit">Cadastro</a></li>
+              				<li><a href="?ctrl=pedido&action=list">Meus Pedidos</a></li>
+              				<li><a href="?ctrl=titulo&action=list">Meus Títulos</a></li>
+            			</ul>
+            
+            			<form class="navbar-search pull-left" method="get">
+    	    				<input id="_busca_" name="_busca_" type="text" class="search-query" placeholder="Buscar">
+    	   	 			</form>
+          			</div><!--/.nav-collapse -->
+        		</div>
+      		</div>
+    	</div>
+   	 	<!-- Fim Menu-->
+ 		<div class="container">
+    		<div class="row-fluid">
+				<div class="alert alert-info">
+          			<h4>
+          				<stron>Ops! Rotina não encontrada ou não desenvolvida...</stron>
+          			</h4>
+          			<p>Em breve esta rotina será implementada!</p>
+          		</div>
+      		</div><!--/row-->
+			<hr>
+      		<footer> 
+      			&copy;2013 - Agape World Inform&aacute;tica Ltda - 
+      			<a href=" http://www.agapeworld.com.br" >www.agapeworld.com.br</a> - Fone: (43) 3033-5886 – (43) 9914-9896 - E-mail: agape@agapeworld.com.br     		
+      		</footer>
+      		
+   		</div><!--/.fluid-container-->	
+    	<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="view/js/bootstrap.min.js"></script>
+  	</body>
+</html>
+

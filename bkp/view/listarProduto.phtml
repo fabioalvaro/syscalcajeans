@@ -1,0 +1,365 @@
+<?php
+	$v_params 	   = $this->getParams();
+	$v_produtos    = $v_params['v_produtos'];
+	$boo_temprod   = $v_params['boo_temprod']; 
+	$int_totalprod = $v_params['int_totalprod']; 
+    $int_menuativo = $v_params['int_menuativo'];
+	$int_pagina	   = $v_params['int_pagina']; 
+	$int_numporpagina = $v_params['int_numporpagina']; 
+	$str_busca		  = $v_params['str_busca']; 
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<title>SeragiWeb</title>
+    <!--
+		<script src="view/js/jquery.js" type="text/javascript"></script>
+	<script src="view/js/jquery.imageLens.js" type="text/javascript"></script>
+	<script type="text/javascript" language="javascript">
+		$(function () {
+			
+			$("#img_01").imageLens();
+
+			$("#img_02").imageLens({ lensSize: 200 });
+			
+
+		});	
+	</script>
+
+	-->
+    
+    	<!-- Le styles -->
+		<link href="view/css/bootstrap.css" rel="stylesheet">
+    	<style type="text/css">
+      		body {
+        	   padding-top: 	60px;
+        	   padding-bottom: 40px;
+      		}
+      		.sidebar-nav {
+        	   padding: 9px 0;
+      		}
+
+      		@media (max-width: 980px) {
+        		/* Enable use of floated navbar text */
+        		.navbar-text.pull-right {
+          			float: none;
+          			padding-left:  5px;
+          			padding-right: 5px;
+        		}
+      		}
+      
+      		#item img {
+      			height: 200px;
+        		width : 200px; 
+      		}
+    	</style>
+    
+    	<link href="view/css/bootstrap-responsive.css" rel="stylesheet">
+	</head>
+    <body>
+    	 <!-- Menus -->
+    	<?php
+    		if( $_SESSION['_app_user']['tppessoa'] == 'vendedor' )
+			{	
+    	 ?>
+    	 <!-- Menu Vendedor-->
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+      		<div class="navbar-inner">
+        		<div class="container">
+    				<a class="brand" href="#">SeragiWeb</a>
+           			<div class="nav-collapse collapse">
+            			<ul class="nav pull-right">
+            				<li> <a href="?ctrl=pedido&action=showcart"> <i class="icon-shopping-cart icon-white"></i> Carrinho</a></li>  
+            				<li> <a href="?ctrl=section&action=logout">  <i class="icon-off icon-white"> </i> Sair </a> </li> 
+           				</ul>
+            
+            			<ul class="nav">
+             	 			<li class="active" ><a href="?ctrl=index">Home</a></li>
+              				<li><a href="?ctrl=vendedor&action=edit">Cadastro</a></li>
+              				<li><a href="?ctrl=cliente&action=list">Clientes</a></li>
+              				<li><a href="?ctrl=pedido&action=list">Pedidos</a></li>
+              				<li><a href="?ctrl=titulo&action=list">Títulos</a></li>
+              				<li><a href="?ctrl=mensagem&action=list">Mensagens</a></li>
+            			</ul>
+            
+            			<form class="navbar-search pull-left" method="get">
+    	    				<input id="_busca_" name="_busca_" type="text" class="search-query" placeholder="Buscar">
+    	   	 			</form>
+          			</div><!--/.nav-collapse -->
+        		</div>
+      		</div>
+    	</div>
+   	 	<!-- Fim Menu-->
+    	
+    	 <?php 
+			}
+			else
+    	 	{	
+    	 ?>
+    	 <!-- Menu Cliente-->
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+      		<div class="navbar-inner">
+        		<div class="container">
+    				<a class="brand" href="#">SeragiWeb</a>
+           			<div class="nav-collapse collapse">
+            			<ul class="nav pull-right">
+            				<li> <a href="?ctrl=pedido&action=showcart"> <i class="icon-shopping-cart icon-white"></i> Meu Carrinho </a> </li>  
+            				<li> <a href="?ctrl=section&action=logout">  <i class="icon-off icon-white"> </i> Sair </a> </li> 
+           				</ul>
+            
+            			<ul class="nav">
+             	 			<li class="active"><a href="?ctrl=index">Home</a></li>
+              				<li><a href="?ctrl=cliente&action=edit">Cadastro</a></li>
+              				<li><a href="?ctrl=pedido&action=list">Meus Pedidos</a></li>
+              				<li><a href="?ctrl=titulo&action=list">Meus Títulos</a></li>
+            			</ul>
+            
+            			<form class="navbar-search pull-left" method="get">
+    	    				<input id="_busca_" name="_busca_" type="text" class="search-query" placeholder="Buscar">
+    	   	 			</form>
+          			</div><!--/.nav-collapse -->
+        		</div>
+      		</div>
+    	</div>
+   	 	<!-- Fim Menu-->
+   	 	<?php
+   	 		}
+   	 	?> 
+   	 	<!-- Fim Menus--> 		
+ 		<div class="container">
+    		<div class="row-fluid">
+				<!-- Barra Lateral -->
+				<div id="sidebar" class="span3">
+    				<div class="well sidebar-nav">
+        				<ul class="nav nav-list">
+        					<li class="nav-header">Jeans</li>
+              				<li <?php if ( $int_menuativo == 1 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=1">Masculino</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 11 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=11"> &nbsp;&nbsp;&nbsp; Bermuda</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 12 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=12"> &nbsp;&nbsp;&nbsp; Calça</a>
+              				</li>
+              				
+              				<li <?php if ( $int_menuativo == 2 ) { ?> class="active" <?php } ?>>
+              						<a href="?ctrl=produto&action=listarProdutos&in_tpser=2">Feminino</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 21 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=2"> &nbsp;&nbsp;&nbsp; Calça</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 22 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=2"> &nbsp;&nbsp;&nbsp; Cigarrete</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 23 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=2"> &nbsp;&nbsp;&nbsp; Shorts</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 24 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=2"> &nbsp;&nbsp;&nbsp; Slin</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 3 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=3">Infantil</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 4 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=4">Promoção</a>
+              				</li>
+              				<li <?php if ( $int_menuativo == 5 ) { ?> class="active" <?php } ?>>
+              					<a href="?ctrl=produto&action=listarProdutos&in_tpser=5">Saldo</a>
+              				</li>
+						</ul>
+    				</div>
+				</div>
+				<!--Fim Barra Lateral -->
+				
+        		<div class="span9">
+        			<!-- Itens -->
+          			<?php
+						if(!$boo_temprod)
+						{
+					?>
+          				<div class="alert alert-info">
+          					<h4>
+          						<stron>Ops! Não foi possível encontrar...</stron>
+          					</h4>
+          					<p>Verifique se você digitou as palavras corretamente ou tente uma nova busca.</p>
+          				</div>
+          			<?php
+						} 
+						else
+						{
+							$count = 0;	
+					?>		
+						<ul class="thumbnails">
+					<?php	
+						foreach( $v_produtos AS $o_produto )
+						{	
+					?>	
+							<li class="span3" id="item">
+    							<div class="thumbnail">
+    								<img id="img_01" src="<?php echo $o_produto->getImagem(); ?>" alt="">
+    								<div class="caption">				
+    						   			<!-- Grades -->
+    						   			<table class="table table-bordered">	
+    						   			<tbody>	
+    						   				<tr>
+    						   				<?php //grades
+    						   					$int_linhas_  = 1;
+												$int_colunas_ = 0;
+    						   					foreach( $o_produto->getGrades() AS $o_grade )
+												{	
+											?>
+  											
+    						   				<?php 
+    						   					if( $o_grade->getQtdProd() <= 0 ) 
+    						   					{ 
+    						   				?> 
+    						   						<td style="color: rgb(153, 153, 153); background-color: rgb(255, 255, 255); height: 20px">
+    						   				<?php 
+												} 
+												else
+												{  
+    						   				?> 
+    						   						<td style="color: rgb(0, 136, 204); height: 20px">
+    						   				<?php 
+												} 
+											?> 	 
+    						   				<?php 
+    						   					echo $o_grade->getGrade();
+    						   					$int_colunas_= $int_colunas_ + 1; 
+    						   				?>	
+    						   						</td>
+    										
+    										<?php 
+    											
+    											if( ($int_colunas_ == 5 ) && ( $int_linhas_ < 3 ) ) 
+												{
+													$int_linhas_  = $int_linhas_ + 1;	
+													$int_colunas_ = 0;
+    										?>
+    										   </tr>
+    										   <tr>
+    										<?php 
+												}
+    										?>
+    										
+    										<?php
+												} //forech
+    											// fim grades 
+    										?>
+    										    										
+    										<?php	  
+    										   while( ( $int_linhas_ <= 3 ) && ( $int_colunas_ < 5 ) )
+    										   {	
+											 ?>
+												  <td style="height: 20px"> </td>
+											<?php
+												$int_colunas_ = $int_colunas_ + 1; 
+    											if( ($int_colunas_ == 5 ) && ( $int_linhas_ < 3 ) ) 
+												{
+													$int_linhas_  = $int_linhas_ + 1;	
+													$int_colunas_ = 0;
+    										?>
+    										   </tr>
+    										   <tr>
+    										<?php 
+												}
+    										?>	
+    										
+											 
+											 <?php
+											   }
+    										 ?>
+    										
+											</tr>
+										</tbody>
+    									</table>
+    								<!-- Fim - Grades -->
+    								
+    						   		<h4 style="text-align: center; font-size: 14px; line-height: 16px; padding: 10px 0 2px" ><?php echo $o_produto->getDescricao(); ?></h4>
+    						   		<p style="text-align: center; ">Ref.: <?php  echo ' '.$o_produto->getReferencia() ?></p>
+    						   		<p class="muted" style="color: #C8002A;  text-align: center; font-weight:bold; font-size: 16px" ><?php echo 'R$ '.number_format($o_produto->getPreco(), 2, ',', '.'); ?></p>
+    							 	 
+    							 		<a href="?ctrl=produto&action=detalhar&id_prod=<?php echo $o_produto->getId(); ?>" class="btn btn-block btn-info">mais detalhes + </a>
+    							 		<a href="?ctrl=pedido&action=addcart&id_prod=<?php echo $o_produto->getId(); ?>" class="btn btn-block">comprar</a>
+    								</div>
+    							</div>
+    						</li>
+					<?php
+							$count++;
+							If ( $count == 4 )
+							{	
+					?>
+						</ul>
+						<ul class="thumbnails">				
+					<?php
+								$count = 0;
+							}
+						} // Fim Foreach
+					?>
+					</ul>
+          			<?php
+						} // Fim If Else
+					?>	
+          			<!-- Fim Itens -->
+    			    
+    			    <!-- Paginação 2 -->
+    			    <ul class="pager">
+    			    <?php
+    			    	$int_prox   = $int_pagina + 1;
+						$int_ant    = $int_pagina - 1;		
+						$int_ultima = @ceil( $int_totalprod / $int_numporpagina );
+					
+    			       if ( $int_ant >= 0 )
+					   {
+					 ?>
+					 	<li class="previous">
+					 	<a href="?ctrl=produto&action=listarProdutos&in_tpser=<?php echo $int_menuativo.'&in_pg='.$int_ant.'&st_ser='.$str_busca?>">&larr; Produtos anteriores</a>
+					 <?php
+					   }
+					   else
+					   {
+					 ?> 
+						<li class="previous disabled">
+						<a href="">&larr; Produtos anteriores</a>	
+					 <?php
+					   }
+					 ?>		
+    					</li>
+    				
+    				<?php					
+    			       if ( $int_prox < $int_ultima )
+					   {
+					 ?>
+					 	<li class="next">
+					 	<a href="?ctrl=produto&action=listarProdutos&in_tpser=<?php echo $int_menuativo.'&in_pg='.$int_prox.'&st_ser='.$str_busca?>">Mais produtos &rarr;</a>
+					 <?php
+					   }
+					   else
+					   {
+					 ?> 
+						<li class="next disabled">
+						<a href="">Mais produtos &rarr;</a>	
+					 <?php
+					   }
+					 ?>		
+    					</li>
+    				</ul>
+    				<!-- Fim paginação -->
+				
+        		</div><!--/span-->
+      		</div><!--/row-->
+			<hr>
+      		<footer> 
+      			&copy;2013 - Agape World Inform&aacute;tica Ltda - 
+      			<a href=" http://www.agapeworld.com.br" >www.agapeworld.com.br</a> - Fone: (43) 3033-5886 – (43) 9914-9896 - E-mail: agape@agapeworld.com.br     		
+      		</footer>
+
+   		</div><!--/.fluid-container-->	
+    	
+    	<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="view/js/bootstrap.min.js"></script>	
+  	</body>
+</html>
